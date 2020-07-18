@@ -1,0 +1,67 @@
+version: '3'
+services:
+
+  classy-proxy:
+    image: nginx:alpine
+    container_name: classy-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/classy-proxy/proxy.conf:/etc/nginx/conf.d/proxy.conf
+    networks:
+      - classy-network
+
+  classy-www:
+    image: nginx:alpine
+    container_name: classy-www
+    volumes:
+      - .:/var/www
+      - ./docker/classy-www/www.conf:/etc/nginx/conf.d/www.conf
+    networks:
+      - classy-network
+
+  classy-php-fpm:
+    build:
+      args:
+        user: sammy
+        uid: 1000
+      context: ./docker/classy-php-fpm
+      dockerfile: Dockerfile
+    container_name: classy-php-fpm
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - .:/var/www/
+      - ./tmp:/tmp
+    expose:
+      - 9000
+    networks:
+      - classy-network
+
+  classy-redis:
+    image: redis:alpine
+    container_name: classy-redis
+    ports:
+      - "6380:6379"
+    networks:
+      - classy-network
+
+  classy-mysql:
+    image: percona/percona-server:5.7
+    container_name: classy-mysql
+    environment:
+      MYSQL_USER: "root"
+      MYSQL_ROOT_PASSWORD: "secret"
+    ports:
+      - "3309:3306"
+    volumes:
+      - classy-db:/var/lib/mysql
+    networks:
+      - classy-network
+
+volumes:
+  classy-db:
+
+networks:
+  classy-network:
+    driver: bridge
