@@ -72,6 +72,18 @@ docker exec classy-php-fpm php artisan passport:client --password
 
 Please note the client ID and secret
 
+Create a test user:
 
+```bash
+docker exec classy-php-fpm php artisan make:test-user
+```
+
+Test oauth:
+
+```bash
+curl -d "grant_type=password&client_id=[client_id]&client_secret=[client_secret]&username=test@test.com&password=secret&scope=*" -X POST http://classy.local/oauth/token
+```
+
+It should return a Bearer token (replace [client_id] and [client_secret] with relevant values)
 
 Go to http://classy.local
