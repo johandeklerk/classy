@@ -19,5 +19,25 @@ docker-compose build
 docker-compose up
 ```
 
+Set up the DB:
+
+```bash
+docker exec -it classy-mysql mysql -u root -p
+```
+
+When prompted, enter the password: secret
+then:
+
+```bash
+create database classy;
+exit;
+```
+
+Run Migrations:
+
+```bash
+docker exec classy-php-fpm php artisan migrate
+```
+
 Go to http://classy.local
 
