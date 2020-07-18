@@ -26,6 +26,12 @@ Start up the containers:
 docker-compose up
 ```
 
+Install composer packages:
+
+```bash
+docker exec classy-php-fpm composer install
+```
+
 Set up the DB:
 
 ```bash
@@ -44,5 +50,21 @@ Run Migrations:
 ```bash
 docker exec classy-php-fpm php artisan migrate
 ```
+
+Generate oauth keys
+
+```bash
+docker exec classy-php-fpm php artisan passport:keys
+```
+
+Create password grant client
+
+```bash
+docker exec classy-php-fpm php artisan passport:client --password
+```
+
+Please note the client ID and secret
+
+
 
 Go to http://classy.local
