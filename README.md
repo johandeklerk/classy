@@ -51,6 +51,13 @@ Run Migrations:
 docker exec classy-php-fpm php artisan migrate
 ```
 
+If the oauth tables aren't created please run
+
+```bash
+docker exec classy-php-fpm php artisan passport:install
+docker exec classy-php-fpm php artisan migrate
+```
+
 Generate oauth keys
 
 ```bash
