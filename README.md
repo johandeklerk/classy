@@ -14,6 +14,8 @@ Add the following to */etc/hosts*:
 127.0.0.1   classy.local
 ```
 
+Build the containers and start up the services:
+
 ```bash
 docker-compose build
 docker-compose up
@@ -26,6 +28,7 @@ docker exec -it classy-mysql mysql -u root -p
 ```
 
 When prompted, enter the password: secret
+
 then:
 
 ```bash
