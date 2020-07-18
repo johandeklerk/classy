@@ -14,10 +14,15 @@ Add the following to */etc/hosts*:
 127.0.0.1   classy.local
 ```
 
-Build the containers and start up the services:
+Build the containers:
 
 ```bash
 docker-compose build
+```
+
+Start up the containers:
+
+```bash
 docker-compose up
 ```
 
@@ -28,8 +33,6 @@ docker exec -it classy-mysql mysql -u root -p
 ```
 
 When prompted, enter the password: secret
-
-then:
 
 ```bash
 create database classy;
@@ -43,4 +46,3 @@ docker exec classy-php-fpm php artisan migrate
 ```
 
 Go to http://classy.local
-
