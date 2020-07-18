@@ -80,10 +80,20 @@ docker exec classy-php-fpm php artisan make:test-user
 
 Test oauth:
 
+replace [client_id] and [client_secret] with relevant values
+
 ```bash
 curl -d "grant_type=password&client_id=[client_id]&client_secret=[client_secret]&username=test@test.com&password=secret&scope=*" -X POST http://classy.local/oauth/token
 ```
 
-It should return a Bearer token (replace [client_id] and [client_secret] with relevant values)
+It should return a Bearer token, copy the access_token value
+
+You can also use Postman for a pretty UI. Just do a normal form-data POST request.
+
+## API
+
+Using the bearer token you can now make API requests to authenticated routes.
+
+For non-auth
 
 Go to http://classy.local
